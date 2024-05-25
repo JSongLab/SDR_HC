@@ -1,10 +1,10 @@
 source("hcsdr.R")
 ## Data generating
-n = 400; p = 10; sd=0.2;
+n = 400; p = 10; sd = 0.2;
 x <-matrix(rnorm(n * p), n, p)
 error <- rnorm(n, sd = sd)
 
-scenario =1
+scenario = 1
 beta1 <- c(rep(1, 5), rep(0, 5))
 beta2 <- c(1, -1, rep(0, 8))
 beta3 <- c(1, 1, rep(0, 8))
@@ -18,7 +18,7 @@ y <- switch(scenario,
 )
 
 ## nonsparse
-n=400
+n = 400
 scenario = 4
 p <- 10
 beta1 <- rep(1, 10) 
@@ -58,9 +58,9 @@ hcdr = hcsdr(x,y, SDRmethod=SDRmethod)
 
 # Measure of Performance
 # Measure of Performance: HC-SDR
-first_eigen(proj_matrix(beta) - proj_matrix(hcdr))
+diff_measure(beta, hcdr)
 # Measure of Performance: Traditional SDR
-first_eigen(proj_matrix(beta) - proj_matrix(init))
+diff_measure(beta, init)
 
 hcdr
 beta1
